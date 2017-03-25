@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -12,7 +14,10 @@ import lombok.NoArgsConstructor;
 public class Contact {
     private long id;
 
+    private ContactType contactType;
+
     private String mobileNumber;
 
+    private List<Contact> referrals;
 
 }
