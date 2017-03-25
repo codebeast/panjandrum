@@ -5,27 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
-
+public class Contact {
     private long id;
 
-    private String name;
-
-    private List<Campaign> campaignList;
-
-    private List<VoucherBucket> codeBucketList;
-
-//    private List<>
-//
-
-
+    private String mobileNumber;
 
 
 }
