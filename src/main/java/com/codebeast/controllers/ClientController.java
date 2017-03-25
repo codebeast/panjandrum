@@ -1,11 +1,9 @@
 package com.codebeast.controllers;
 
 import com.codebeast.domain.Client;
-import com.codebeast.service.CRUDService;
+import com.codebeast.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,11 +17,11 @@ public class ClientController {
 
     private static final String VIEW_NAME = "clients";
 
-    private final CRUDService crudService;
+    private final ClientService clientService;
 
     @Autowired
-    public ClientController(CRUDService crudService) {
-        this.crudService = crudService;
+    public ClientController(final ClientService clientService) {
+        this.clientService = clientService;
     }
 
     @GetMapping
@@ -37,6 +35,7 @@ public class ClientController {
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Client createClient(@RequestBody @Valid Client client) {
 
+        clientService.alreadyExists(client);
 
         return client;
     }

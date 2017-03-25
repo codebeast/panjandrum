@@ -18,7 +18,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.security.Principal;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertNotNull;

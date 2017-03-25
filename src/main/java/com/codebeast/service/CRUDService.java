@@ -1,13 +1,7 @@
 package com.codebeast.service;
 
-import org.springframework.stereotype.Service;
 
-@Service
-public class CRUDService {
-
-
-
-
-
-
+@FunctionalInterface
+public interface CRUDService<T> {
+    boolean alreadyExists(final T object);
 }
