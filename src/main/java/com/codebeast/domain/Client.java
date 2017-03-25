@@ -10,13 +10,15 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-
+@Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Client {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     @NotNull
