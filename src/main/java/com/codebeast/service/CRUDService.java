@@ -16,7 +16,9 @@ public abstract class CRUDService<T> {
         if (alreadyExists) {
             throw new NoDuplicatesAllowedException();
         }
-        return getRepository().save(object);
+        final T saved = getRepository().save(object);
+        System.out.println("created new " + saved.getClass());
+        return saved;
     }
 
 }

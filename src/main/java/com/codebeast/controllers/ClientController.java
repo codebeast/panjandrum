@@ -32,7 +32,6 @@ public class ClientController {
         return new ModelAndView(VIEW_NAME, map);
     }
 
-
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Client createClient(@RequestBody @Valid Client client) throws NoDuplicatesAllowedException {
         return clientService.create(client);
