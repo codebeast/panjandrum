@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="footer">
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script>
+          $(document).ready(function() {
+                $('input#input_text, textarea#textarea1').characterCounter();
+          });
+
+    </script>
+</div>
+</html>
