@@ -20,6 +20,8 @@ public class Client {
 
     private List<Campaign> campaignList;
 
+    private List<CodeBucket> codeBucketList;
+
 //    private List<>
 //
 

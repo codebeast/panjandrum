@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Campaign {
+public class CodeBucket {
     private long id;
-
-
-
 }
