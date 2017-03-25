@@ -22,10 +22,4 @@ public class Client {
 
     private List<VoucherBucket> codeBucketList;
 
-//    private List<>
-//
-
-
-
-
 }
