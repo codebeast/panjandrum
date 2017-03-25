@@ -2,7 +2,7 @@ package com.codebeast.service;
 
 import com.codebeast.dao.ClientRepository;
 import com.codebeast.domain.Client;
-import com.codebeast.exceptions.NoDuplicateException;
+import com.codebeast.exceptions.NoDuplicatesAllowedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
@@ -19,9 +19,8 @@ public class ClientService extends CRUDService<Client> {
     }
 
     @Override
-    public boolean alreadyExists(final Client object) throws NoDuplicateException {
-        //check if exists
-        return false;
+    public boolean alreadyExists(final Client object) throws NoDuplicatesAllowedException {
+        return clientRepository.findByName(object.getName()) != null;
     }
 
     @Override

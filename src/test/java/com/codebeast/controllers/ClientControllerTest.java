@@ -77,6 +77,26 @@ public class ClientControllerTest {
                 .andExpect(status().isOk());
     }
 
+
+    @Test
+    public void createClientWithDuplicateName() throws Exception {
+        mockMvc.perform(post("/clients/create")
+                .content(this.json(Client
+                        .builder()
+                        .name("DuplicateNameTest")
+                        .build()))
+                .contentType(contentType))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(post("/clients/create")
+                .content(this.json(Client
+                        .builder()
+                        .name("DuplicateNameTest")
+                        .build()))
+                .contentType(contentType))
+                .andExpect(status().isBadRequest());
+    }
+
     @Test
     public void createClientWithNoName() throws Exception {
         mockMvc.perform(post("/clients/create")

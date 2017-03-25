@@ -1,7 +1,7 @@
 package com.codebeast.controllers;
 
 import com.codebeast.domain.Client;
-import com.codebeast.exceptions.NoDuplicateException;
+import com.codebeast.exceptions.NoDuplicatesAllowedException;
 import com.codebeast.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,12 +34,7 @@ public class ClientController {
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Client createClient(@RequestBody @Valid Client client) {
-        try {
-            return clientService.create(client);
-        } catch (NoDuplicateException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Client createClient(@RequestBody @Valid Client client) throws NoDuplicatesAllowedException {
+        return clientService.create(client);
     }
 }

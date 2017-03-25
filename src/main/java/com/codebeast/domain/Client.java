@@ -30,8 +30,8 @@ public class Client {
     @Length(min = 3, max = 100)
     private String name;
 
-    private List<Campaign> campaignList;
-
-    private List<VoucherBucket> codeBucketList;
+//    private List<Campaign> campaignList;
+//
+//    private List<VoucherBucket> codeBucketList;
 
 }
