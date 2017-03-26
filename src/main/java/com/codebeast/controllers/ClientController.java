@@ -3,6 +3,7 @@ package com.codebeast.controllers;
 import com.codebeast.domain.Campaign;
 import com.codebeast.domain.Client;
 import com.codebeast.exceptions.NoDuplicatesAllowedException;
+import com.codebeast.service.CampaignService;
 import com.codebeast.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,10 +23,12 @@ public class ClientController {
     private static final String CAMPAIGN_BUILDER_VIEW_NAME = "campaign";
 
     private final ClientService clientService;
+    private final CampaignService campaignService;
 
     @Autowired
-    public ClientController(final ClientService clientService) {
+    public ClientController(final ClientService clientService, final CampaignService campaignService) {
         this.clientService = clientService;
+        this.campaignService = campaignService;
     }
 
     @GetMapping
@@ -54,6 +57,8 @@ public class ClientController {
 
     @GetMapping("/{id}/campaign/{campaignId}")
     public ModelAndView getCampaign(Model model, @PathVariable(name = "id") final long id, @PathVariable(name = "campaignId") final long campaignId) {
+        model.addAttribute("client", clientService.findOne(id));
+        model.addAttribute("campaign", campaignService.findOne(campaignId));
         return new ModelAndView(CAMPAIGN_BUILDER_VIEW_NAME, model.asMap());
     }
 
