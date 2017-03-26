@@ -9,6 +9,7 @@ function updatePreview() {
     $('#previewCard').addClass(color);
     $('#previewCard').addClass('card');
     $('#previewCard').addClass('center');
+    $('#previewCard').addClass('z-depth-3');
 
     var textColor = formData.textColor;
     var primaryTextCss = textColor + '-text';

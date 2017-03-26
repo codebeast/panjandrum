@@ -20,7 +20,8 @@ public class ClientController {
 
     private static final String VIEW_NAME = "clients";
     private static final String CLIENT_VIEW_NAME = "client";
-    private static final String CAMPAIGN_BUILDER_VIEW_NAME = "campaign";
+    private static final String VOUCHER_BUILDER_VIEW_NAME = "voucher_builder";
+    private static final String CAMPAIGN_VIEW_NAME = "campaign";
 
     private final ClientService clientService;
     private final CampaignService campaignService;
@@ -59,10 +60,17 @@ public class ClientController {
     public ModelAndView getCampaign(Model model, @PathVariable(name = "id") final long id, @PathVariable(name = "campaignId") final long campaignId) {
         model.addAttribute("client", clientService.findOne(id));
         model.addAttribute("campaign", campaignService.findOne(campaignId));
-        return new ModelAndView(CAMPAIGN_BUILDER_VIEW_NAME, model.asMap());
+        return new ModelAndView(CAMPAIGN_VIEW_NAME, model.asMap());
     }
 
-    @RequestMapping(value = "/{id}/campaign/{campaignId}/savecampaign", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/{id}/campaign/{campaignId}/voucherbuilder")
+    public ModelAndView getVoucherBuilder(Model model, @PathVariable(name = "id") final long id, @PathVariable(name = "campaignId") final long campaignId) {
+        model.addAttribute("client", clientService.findOne(id));
+        model.addAttribute("campaign", campaignService.findOne(campaignId));
+        return new ModelAndView(VOUCHER_BUILDER_VIEW_NAME, model.asMap());
+    }
+
+    @RequestMapping(value = "/{id}/campaign/{campaignId}/voucherbuilder/savecampaign", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Campaign saveCampaign(@PathVariable(name = "id") final long id, @RequestBody @Valid Campaign campaign, @PathVariable(name = "campaignId") final long campaignId) {
         final Campaign campaign1 = clientService.saveCampaign(campaign, id);
         campaign1.setClient(null);
