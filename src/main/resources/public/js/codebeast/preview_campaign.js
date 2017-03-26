@@ -69,8 +69,6 @@ $(document).keypress(function(e) {
   }
 });
 
-console.log("preview")
 $(document).ready(function() {
-        console.log("update the view")
     updatePreview();
-}
+});
