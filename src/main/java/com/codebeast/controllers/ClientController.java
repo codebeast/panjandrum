@@ -62,4 +62,11 @@ public class ClientController {
         return new ModelAndView(CAMPAIGN_BUILDER_VIEW_NAME, model.asMap());
     }
 
+    @RequestMapping(value = "/{id}/campaign/{campaignId}/savecampaign", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Campaign saveCampaign(@PathVariable(name = "id") final long id, @RequestBody @Valid Campaign campaign, @PathVariable(name = "campaignId") final long campaignId) {
+        final Campaign campaign1 = clientService.saveCampaign(campaign, id);
+        campaign1.setClient(null);
+        return campaign1;
+    }
+
 }

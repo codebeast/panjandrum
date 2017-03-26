@@ -53,4 +53,10 @@ public class ClientService extends CRUDService<Client> {
         campaign.setCreatedOn(new Date());
         return campaignRepository.save(campaign);
     }
+
+    public Campaign saveCampaign(final Campaign campaign, final long id) {
+        final Campaign loaded = campaignRepository.findOne(id);
+        loaded.merge(campaign);
+        return campaignRepository.save(loaded);
+    }
 }

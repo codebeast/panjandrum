@@ -26,71 +26,74 @@
 <div class="container">
     <div class="row">
         <div class="col s12 m6 l6">
-            <p th:text="${campaign.name}"></p>
-
             <div class="row">
-                <form class="col s12" id="campaignForm">
+
+                <form class="col s12" id="campaignForm" th:object="${campaign}">
 
                     <div class="row">
+
                         <div class="input-field col s12">
-                            <input id="campaignType" type="text" class="validate"/>
+                            <input id="name" type="text" class="validate" th:field="*{name}"/>
+                            <label for="name">Campaign Name</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input id="campaignType" type="text" class="validate" th:field="*{campaignType}"/>
                             <label for="campaignType">Campaign Type</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input id="backgroundColor" type="text" class="validate" name="backgroundColor"/>
+                            <input id="backgroundColor" type="text" class="validate" name="backgroundColor" th:field="*{backgroundColor}"/>
                             <label for="backgroundColor">Primary Color</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input id="textColor" type="text" class="validate" name="textColor"/>
+                            <input id="textColor" type="text" class="validate" name="textColor" th:field="*{textColor}"/>
                             <label for="textColor">Secondary Color</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input id="primaryImage" type="text" class="validate" name="primaryImage"/>
+                            <input id="primaryImage" type="text" class="validate" name="primaryImage" th:field="*{primaryImage}"/>
                             <label for="primaryImage">Primary Image</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input id="headline" type="text" class="validate" name="headline"/>
+                            <input id="headline" type="text" class="validate" name="headline" th:field="*{headline}"/>
                             <label for="headline">Headline</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input id="body" type="text" class="validate" name="body"/>
+                            <input id="body" type="text" class="validate" name="body" th:field="*{body}"/>
                             <label for="body">Body</label>
                         </div>
 
 
-
-
                         <div class="input-field col s12">
-                            <input id="secondaryImage" type="text" class="validate" name="secondaryImage"/>
+                            <input id="secondaryImage" type="text" class="validate" name="secondaryImage"  th:field="*{secondaryImage}"/>
                             <label for="secondaryImage">Secondary Image</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input id="startCampaign" type="text" class="validate"/>
+                            <input id="startCampaign" type="text" class="validate"  th:field="*{startCampaign}"/>
                             <label for="startCampaign">Start Campaign Date</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input id="endCampaign" type="text" class="validate"/>
+                            <input id="endCampaign" type="text" class="validate"  th:field="*{endCampaign}"/>
                             <label for="endCampaign">End Campaign Date</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input id="campaignStatus" type="text" class="validate"/>
+                            <input id="campaignStatus" type="text" class="validate"  th:field="*{campaignStatus}"/>
                             <label for="campaignStatus">Campaign Status</label>
                         </div>
 
-                        <div class="col s6">
-                            <button>Save</button>
+                        <div class="col s12">
+                            <a id="submit_button" name="submit_button" class="waves-effect waves-light btn pulse">
+                                Save Campaign
+                            </a>
                         </div>
 
-                        <div class="col s6">
-                        </div>
                     </div>
                 </form>
             </div>
@@ -128,7 +131,6 @@
 
             </div>
         </div>
-
     </div>
 </div>
 

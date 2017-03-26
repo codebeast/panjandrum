@@ -45,6 +45,17 @@ public class Campaign {
     private String headline;
     private String body;
 
+    public void merge(final Campaign campaign) {
+        this.campaignStatus = campaign.campaignStatus;
+        this.backgroundColor = campaign.backgroundColor;
+        this.textColor = campaign.textColor;
+        this.campaignType = campaign.campaignType;
+        this.primaryImage = campaign.primaryImage;
+        this.secondaryImage = campaign.secondaryImage;
+        this.headline = campaign.headline;
+        this.body = campaign.body;
+    }
+
     //private List<Contact> contactList;
 
 
