@@ -31,7 +31,7 @@ public class Campaign {
     @ManyToOne
     private Client client;
 
-    private boolean active;
+    private CampaignStatus campaignStatus = CampaignStatus.DRAFT;
 
     private Date createdOn;
     private Date startCampaign;
