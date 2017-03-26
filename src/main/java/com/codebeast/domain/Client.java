@@ -27,7 +27,7 @@ public class Client {
     @Length(min = 3, max = 100)
     private String name;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private List<Campaign> campaignList;
 //
 //    private List<VoucherBucket> codeBucketList;

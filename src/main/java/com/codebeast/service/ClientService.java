@@ -1,6 +1,8 @@
 package com.codebeast.service;
 
+import com.codebeast.dao.CampaignRepository;
 import com.codebeast.dao.ClientRepository;
+import com.codebeast.domain.Campaign;
 import com.codebeast.domain.Client;
 import com.codebeast.exceptions.NoDuplicatesAllowedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,12 @@ public class ClientService extends CRUDService<Client> {
 
 
     private final ClientRepository clientRepository;
+    private final CampaignRepository campaignRepository;
 
     @Autowired
-    public ClientService(ClientRepository clientRepository) {
+    public ClientService(final ClientRepository clientRepository, final CampaignRepository campaignRepository) {
         this.clientRepository = clientRepository;
+        this.campaignRepository = campaignRepository;
     }
 
     @Override
@@ -36,5 +40,11 @@ public class ClientService extends CRUDService<Client> {
 
     public Client findOne(final long id) {
         return clientRepository.findOne(id);
+    }
+
+    public Campaign createCampaign(final long id, final Campaign campaign) {
+        final Client client = clientRepository.findOne(id);
+        campaign.setClient(client);
+        return campaignRepository.save(campaign);
     }
 }

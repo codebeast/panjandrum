@@ -1,5 +1,6 @@
 package com.codebeast.controllers;
 
+import com.codebeast.domain.Campaign;
 import com.codebeast.domain.Client;
 import com.codebeast.exceptions.NoDuplicatesAllowedException;
 import com.codebeast.service.ClientService;
@@ -18,6 +19,7 @@ public class ClientController {
 
     private static final String VIEW_NAME = "clients";
     private static final String CLIENT_VIEW_NAME = "client";
+    private static final String CAMPAIGN_BUILDER_VIEW_NAME = "campaignBuilder";
 
     private final ClientService clientService;
 
@@ -43,6 +45,11 @@ public class ClientController {
         final Client client = clientService.findOne(id);
         model.addAttribute("client", client);
         return new ModelAndView(CLIENT_VIEW_NAME, model.asMap());
+    }
+
+    @RequestMapping(value = "/{id}/createcampaign", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Campaign createCampaign(@PathVariable(name = "id") final long id, @RequestBody @Valid Campaign campaign) {
+        return clientService.createCampaign(id, campaign);
     }
 
 }

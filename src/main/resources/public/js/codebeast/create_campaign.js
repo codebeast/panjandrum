@@ -4,7 +4,7 @@ function postForm(){
     var formData = $("#create_campaign").serializeArray().reduce(function(a, x) { a[ x.name] = x.value; return a; }, {});
     $.ajax({
         type: "POST",
-        url: "/campaigns/create",
+        url: window.location.href + "/createcampaign",
         data: JSON.stringify(formData),
         contentType: "application/json",
         success: function(data){
