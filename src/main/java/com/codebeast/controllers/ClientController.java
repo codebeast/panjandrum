@@ -19,7 +19,7 @@ public class ClientController {
 
     private static final String VIEW_NAME = "clients";
     private static final String CLIENT_VIEW_NAME = "client";
-    private static final String CAMPAIGN_BUILDER_VIEW_NAME = "campaignBuilder";
+    private static final String CAMPAIGN_BUILDER_VIEW_NAME = "campaign";
 
     private final ClientService clientService;
 
@@ -50,6 +50,11 @@ public class ClientController {
     @RequestMapping(value = "/{id}/createcampaign", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Campaign createCampaign(@PathVariable(name = "id") final long id, @RequestBody @Valid Campaign campaign) {
         return clientService.createCampaign(id, campaign);
+    }
+
+    @GetMapping("/{id}/campaign/{campaignId}")
+    public ModelAndView getCampaign(Model model, @PathVariable(name = "id") final long id, @PathVariable(name = "campaignId") final long campaignId) {
+        return new ModelAndView(CAMPAIGN_BUILDER_VIEW_NAME, model.asMap());
     }
 
 }
