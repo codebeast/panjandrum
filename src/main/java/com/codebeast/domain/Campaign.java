@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -39,8 +38,8 @@ public class Campaign {
     private Date startCampaign;
     private Date endCampaign;
 
-    private String primaryColor;
-    private String secondaryColor;
+    private String backgroundColor;
+    private String textColor;
     private String primaryImage;
     private String secondaryImage;
     private String headline;
