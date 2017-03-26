@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -56,7 +57,8 @@ public class Campaign {
         this.body = campaign.body;
     }
 
-    //private List<Contact> contactList;
+    @OneToMany(mappedBy = "campaign", fetch = FetchType.EAGER)
+    private List<Contact> contactList;
 
 
 }

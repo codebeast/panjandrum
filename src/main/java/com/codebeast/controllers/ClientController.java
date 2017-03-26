@@ -2,16 +2,23 @@ package com.codebeast.controllers;
 
 import com.codebeast.domain.Campaign;
 import com.codebeast.domain.Client;
+import com.codebeast.domain.Contact;
 import com.codebeast.exceptions.NoDuplicatesAllowedException;
+import com.codebeast.service.CSVUtils;
 import com.codebeast.service.CampaignService;
 import com.codebeast.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -85,5 +92,35 @@ public class ClientController {
         model.addAttribute("campaign", campaignService.findOne(campaignId));
         return new ModelAndView(CONTACT_MANAGER_VIEW_NAME, model.asMap());
     }
+
+
+    @PostMapping("/{id}/campaign/{campaignId}/contactmanager/upload")
+    public ModelAndView handleFileUpload(@RequestParam("file") MultipartFile file,
+                                         RedirectAttributes redirectAttributes, Model model, @PathVariable(name = "id") final long id, @PathVariable(name = "campaignId") final long campaignId) {
+        File convFile = null;
+        try {
+            convFile = File.createTempFile("phone", ".csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (final FileOutputStream fos = new FileOutputStream(convFile)) {
+            fos.write(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            final List<Contact> contacts = CSVUtils.parsePhoneNumbers(convFile);
+            System.out.println(contacts);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return getContactManager(model, id, campaignId);
+
+    }
+
+
 
 }
