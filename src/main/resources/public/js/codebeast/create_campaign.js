@@ -1,19 +1,19 @@
 function postForm(){
     showSave();
 
-    var formData = $("#create_client").serializeArray().reduce(function(a, x) { a[ x.name] = x.value; return a; }, {});
+    var formData = $("#create_campaign").serializeArray().reduce(function(a, x) { a[ x.name] = x.value; return a; }, {});
     $.ajax({
         type: "POST",
-        url: "/clients/create",
+        url: "/campaigns/create",
         data: JSON.stringify(formData),
         contentType: "application/json",
         success: function(data){
-            Materialize.toast('Created client ' + data.name, 4000)
+            Materialize.toast('Created campaign ' + data.name, 4000)
             hideSave();
             $('#modal1').modal('close');
         },
-        error: function(data){
-            Materialize.toast('Failed to create client', 4000)
+        error: function(){
+            Materialize.toast('Failed to create campaign', 4000)
             hideSave();
         }
     });
