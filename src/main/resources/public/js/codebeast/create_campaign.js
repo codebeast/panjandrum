@@ -29,7 +29,7 @@ function hideSave() {
     $("#submit_button").removeClass('disabled');
 }
 
-$("#create_client_button").click(postForm);
+$("#submit_button").click(postForm);
 
 $(document).keypress(function(e) {
   if(e.which == 13) {
