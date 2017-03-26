@@ -2,17 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Hello World!</title>
+    <title>Campaign Management | Panjandrum </title>
     <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
-<div th:replace="fragments/navbar :: navbar"></div>
 
+<nav>
+    <div class="nav-wrapper">
+        <div class="nav-wrapper">
+            <div class="row">
+                <div class="col s12">
+                    <a href="/dashboard" class="breadcrumb">Dashboard</a>
+                    <a href="/clients" class="breadcrumb">Client Manager</a>
+                    <a th:href="'/clients/' + ${client.id}" class="breadcrumb"
+                       th:text="${client.name}">Client</a>
+                    <a href="" class="breadcrumb" th:text="${campaign.name}">Client</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
 
 <div class="container">
     <div class="row">
         <div class="col s12 m6 l6">
-            <p>details</p>
+            <p th:text="${campaign.name}"></p>
         </div>
         <div class="col s12 m6 l6">
             <p>preview</p>
