@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -30,7 +27,8 @@ public class Client {
     @Length(min = 3, max = 100)
     private String name;
 
-//    private List<Campaign> campaignList;
+    @OneToMany(mappedBy = "client")
+    private List<Campaign> campaignList;
 //
 //    private List<VoucherBucket> codeBucketList;
 
