@@ -26,6 +26,6 @@ public class Contact {
 
     private String mobileNumber;
 
-    private List<Contact> referrals;
+//    private List<Contact> referrals;
 
 }

@@ -57,7 +57,7 @@ public class Campaign {
         this.body = campaign.body;
     }
 
-    @OneToMany(mappedBy = "campaign", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "campaign")
     private List<Contact> contactList;
 
 
