@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClientService extends CRUDService<Client> {
 
@@ -26,5 +28,9 @@ public class ClientService extends CRUDService<Client> {
     @Override
     protected CrudRepository<Client, Long> getRepository() {
         return clientRepository;
+    }
+
+    public List<Client> getAllClients() {
+        return clientRepository.findAll();
     }
 }
