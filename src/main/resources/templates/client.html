@@ -9,7 +9,15 @@
 
 <nav>
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo center">Client Manager</a>
+        <div class="nav-wrapper">
+            <div class="row">
+                <div class="col s12">
+                    <a href="/dashboard" class="breadcrumb">Dashboard</a>
+                    <a href="/clients" class="breadcrumb">Client Manager</a>
+                    <a href="#!" class="breadcrumb" th:text="${client} != null ? ${client.name} : 'Client Not Found'">Client</a>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
 

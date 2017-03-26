@@ -30,3 +30,10 @@ function hideSave() {
 }
 
 $("#create_client_button").click(postForm);
+
+$(document).keypress(function(e) {
+  if(e.which == 13) {
+    e.preventDefault();
+    postForm();
+  }
+});
