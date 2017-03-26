@@ -29,7 +29,6 @@ public class ClientController {
 
     @GetMapping
     public ModelAndView getView(Model model) {
-        model.addAttribute("pageName", VIEW_NAME);
         final List<Client> allClients = clientService.getAllClients();
         model.addAttribute("clients", allClients);
         return new ModelAndView(VIEW_NAME, model.asMap());

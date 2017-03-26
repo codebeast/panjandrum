@@ -2,12 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Hello World!</title>
+    <title>Client Management | Panjandrum </title>
     <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
 
-<div th:replace="fragments/navbar :: navbar"></div>
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">Client Manager</a>
+    </div>
+</nav>
 
 <div th:replace="fragments/add_client_modal :: add_client_modal" th:remove="tag"></div>
 
@@ -21,8 +25,6 @@
                 <ul>
                     <li><a class="btn-floating green modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
                     </li>
-                    <li><a class="btn-floating yellow lighten-2 modal-trigger" href="#modal1"><i
-                            class="material-icons">mode_edit</i></a></li>
                 </ul>
             </div>
 
@@ -34,8 +36,11 @@
 
         <div th:each="client : ${clients}" class="col s12 m6 l4 center">
             <div class="card grey lighten-3 z-depth-3">
+
                 <a class="btn-floating halfway-fab waves-effect waves-light green"><i
                         class="material-icons">view_module</i></a>
+
+
                 <div class="card-content black-text">
                     <span class="card-title" th:text="${client.name}">Client Name</span>
                     <div class="divider"></div>
