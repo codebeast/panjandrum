@@ -39,6 +39,13 @@ public class Campaign {
     private Date startCampaign;
     private Date endCampaign;
 
+    private String primaryColor;
+    private String secondaryColor;
+    private String primaryImage;
+    private String secondaryImage;
+    private String headline;
+    private String body;
+
     //private List<Contact> contactList;
 
 
