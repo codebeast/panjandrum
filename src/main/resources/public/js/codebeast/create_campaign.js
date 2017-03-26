@@ -21,12 +21,12 @@ function postForm(){
 
 function showSave() {
     $("#save_spinner").addClass("active");
-    $("#create_client_button").addClass('disabled');
+    $("#submit_button").addClass('disabled');
 }
 
 function hideSave() {
     $("#save_spinner").removeClass("active");
-    $("#create_client_button").removeClass('disabled');
+    $("#submit_button").removeClass('disabled');
 }
 
 $("#create_client_button").click(postForm);
