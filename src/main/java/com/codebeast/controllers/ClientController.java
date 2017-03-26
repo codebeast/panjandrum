@@ -22,6 +22,7 @@ public class ClientController {
     private static final String CLIENT_VIEW_NAME = "client";
     private static final String VOUCHER_BUILDER_VIEW_NAME = "voucher_builder";
     private static final String CAMPAIGN_VIEW_NAME = "campaign";
+    private static final String CONTACT_MANAGER_VIEW_NAME = "contacts";
 
     private final ClientService clientService;
     private final CampaignService campaignService;
@@ -75,6 +76,14 @@ public class ClientController {
         final Campaign campaign1 = clientService.saveCampaign(campaign, id);
         campaign1.setClient(null);
         return campaign1;
+    }
+
+
+    @GetMapping("/{id}/campaign/{campaignId}/contactmanager")
+    public ModelAndView getContactManager(Model model, @PathVariable(name = "id") final long id, @PathVariable(name = "campaignId") final long campaignId) {
+        model.addAttribute("client", clientService.findOne(id));
+        model.addAttribute("campaign", campaignService.findOne(campaignId));
+        return new ModelAndView(CONTACT_MANAGER_VIEW_NAME, model.asMap());
     }
 
 }
