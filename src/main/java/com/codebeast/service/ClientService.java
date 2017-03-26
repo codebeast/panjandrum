@@ -33,4 +33,8 @@ public class ClientService extends CRUDService<Client> {
     public List<Client> getAllClients() {
         return clientRepository.findAll();
     }
+
+    public Client findOne(final long id) {
+        return clientRepository.findOne(id);
+    }
 }

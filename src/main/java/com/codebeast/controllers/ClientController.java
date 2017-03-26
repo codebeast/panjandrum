@@ -10,15 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("clients")
 public class ClientController {
 
     private static final String VIEW_NAME = "clients";
+    private static final String CLIENT_VIEW_NAME = "client";
 
     private final ClientService clientService;
 
@@ -37,6 +36,13 @@ public class ClientController {
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Client createClient(@RequestBody @Valid Client client) throws NoDuplicatesAllowedException {
         return clientService.create(client);
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView getClient(Model model, @PathVariable(name = "id") final long id) {
+        final Client client = clientService.findOne(id);
+        model.addAttribute("client", client);
+        return new ModelAndView(CLIENT_VIEW_NAME, model.asMap());
     }
 
 }
