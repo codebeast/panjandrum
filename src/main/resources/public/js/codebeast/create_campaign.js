@@ -10,6 +10,7 @@ function postForm(){
         success: function(data){
             Materialize.toast('Created campaign ' + data.name, 4000)
             hideSave();
+            location.reload(true);
             $('#modal1').modal('close');
         },
         error: function(){

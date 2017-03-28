@@ -3,10 +3,12 @@ package com.codebeast.controllers;
 import com.codebeast.domain.Campaign;
 import com.codebeast.domain.Client;
 import com.codebeast.domain.Contact;
+import com.codebeast.domain.ContactType;
 import com.codebeast.exceptions.NoDuplicatesAllowedException;
 import com.codebeast.service.CSVUtils;
 import com.codebeast.service.CampaignService;
 import com.codebeast.service.ClientService;
+import com.codebeast.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
@@ -33,11 +35,13 @@ public class ClientController {
 
     private final ClientService clientService;
     private final CampaignService campaignService;
+    private final ContactService contactService;
 
     @Autowired
-    public ClientController(final ClientService clientService, final CampaignService campaignService) {
+    public ClientController(final ClientService clientService, final CampaignService campaignService, final ContactService contactService) {
         this.clientService = clientService;
         this.campaignService = campaignService;
+        this.contactService = contactService;
     }
 
     @GetMapping
@@ -97,30 +101,9 @@ public class ClientController {
     @PostMapping("/{id}/campaign/{campaignId}/contactmanager/upload")
     public ModelAndView handleFileUpload(@RequestParam("file") MultipartFile file,
                                          RedirectAttributes redirectAttributes, Model model, @PathVariable(name = "id") final long id, @PathVariable(name = "campaignId") final long campaignId) {
-        File convFile = null;
-        try {
-            convFile = File.createTempFile("phone", ".csv");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try (final FileOutputStream fos = new FileOutputStream(convFile)) {
-            fos.write(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            final List<Contact> contacts = CSVUtils.parsePhoneNumbers(convFile);
-            System.out.println(contacts);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        contactService.createContacts(file, campaignId);
         return getContactManager(model, id, campaignId);
-
     }
-
 
 
 }

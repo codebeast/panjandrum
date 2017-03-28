@@ -41,6 +41,11 @@
                 </ul>
             </div>
 
+            <div>show numbers here</div>
+            <div th:each="contact : ${campaign.contactList}">
+                <p th:text="${contact.mobileNumber}"></p>
+            </div>
+
             <form method="POST" enctype="multipart/form-data"
                   th:action="${#httpServletRequest.requestURI} + '/upload'">
                 <table>

@@ -9,6 +9,7 @@ function postForm(){
         contentType: "application/json",
         success: function(data){
             Materialize.toast('Created client ' + data.name, 4000)
+            location.reload(true);
             hideSave();
             $('#modal1').modal('close');
         },
