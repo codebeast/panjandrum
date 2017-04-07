@@ -98,11 +98,11 @@ public class ClientController {
     }
 
 
-    @PostMapping("/{id}/campaign/{campaignId}/contactmanager/upload")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file,
+    @PostMapping("/{id}/campaign/{campaignId}/contactmanager")
+    public ModelAndView handleFileUpload(@RequestParam("file") MultipartFile file,
                                          RedirectAttributes redirectAttributes, Model model, @PathVariable(name = "id") final long id, @PathVariable(name = "campaignId") final long campaignId) {
         contactService.createContacts(file, campaignId);
-        return "redirect:/dashboard";
+        return getContactManager(model, id, campaignId);
     }
 
 

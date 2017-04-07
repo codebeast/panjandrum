@@ -17,7 +17,9 @@ public class CSVUtils {
         final List<Contact> contacts = new ArrayList<>();
         while (scanner.hasNext()) {
             final List<String> line = parseLine(scanner.nextLine());
-            contacts.add(Contact.builder().mobileNumber(line.get(0)).build());
+            if (!line.get(0).isEmpty()) {
+                contacts.add(Contact.builder().mobileNumber(line.get(0)).build());
+            }
         }
         scanner.close();
         return contacts;

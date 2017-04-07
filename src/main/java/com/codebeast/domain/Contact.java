@@ -26,6 +26,9 @@ public class Contact {
 
     private String mobileNumber;
 
+    @OneToOne
+    private Voucher voucher;
+
 //    private List<Contact> referrals;
 
 }
