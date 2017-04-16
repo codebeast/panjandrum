@@ -29,5 +29,7 @@ public class Contact {
     @JsonBackReference
     private ContactList contactList;
 
+    @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Voucher> vouchers;
 
 }
