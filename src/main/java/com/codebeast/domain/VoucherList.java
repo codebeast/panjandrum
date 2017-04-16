@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class VoucherBucket {
+public class VoucherList {
     private long id;
     private List<Voucher> voucherList;
 }

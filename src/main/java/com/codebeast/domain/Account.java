@@ -6,18 +6,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
+@Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Voucher {
+public class Account {
 
+    @Id
     private long id;
 
-    private String code;
-    private boolean redeemed;
+    private String name;
+    private String email;
+    private String password;
 
-    private Contact contact;
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    private List<ContactList> contactLists;
 
 }

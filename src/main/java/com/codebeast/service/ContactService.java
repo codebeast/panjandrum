@@ -1,79 +1,51 @@
 package com.codebeast.service;
 
-import com.codebeast.dao.ContactRepository;
-import com.codebeast.domain.Campaign;
+import com.codebeast.dao.AccountRepository;
+import com.codebeast.dao.ContactListRepository;
+import com.codebeast.domain.Account;
 import com.codebeast.domain.Contact;
-import com.codebeast.domain.ContactType;
-import com.codebeast.exceptions.NoDuplicatesAllowedException;
+import com.codebeast.domain.ContactList;
+import com.codebeast.dto.NewContactList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ContactService extends CRUDService<Contact> {
+public class ContactService {
 
-
-    private final ContactRepository contactRepository;
-    private final CampaignService campaignService;
+    private final ContactListRepository contactListRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public ContactService(final ContactRepository contactRepository, final CampaignService campaignService) {
-        this.contactRepository = contactRepository;
-        this.campaignService = campaignService;
+    public ContactService(ContactListRepository contactListRepository, AccountRepository accountRepository) {
+        this.contactListRepository = contactListRepository;
+        this.accountRepository = accountRepository;
     }
 
-    @Override
-    public boolean alreadyExists(final Contact object) throws NoDuplicatesAllowedException {
-        return contactRepository.findOne(object.getId()) != null;
+    public List<ContactList> availableLists(final String accountName) {
+        final Account account = accountRepository.findByName(accountName);
+        final List<ContactList> contactLists = contactListRepository.findByAccount(account);
+        contactLists.forEach(contactList -> {
+            contactList.setCount(contactList.getContacts().size());
+            contactList.setContacts(null);
+            contactList.setAccount(null);
+
+        });
+        return contactLists;
     }
 
-    @Override
-    protected CrudRepository<Contact, Long> getRepository() {
-        return contactRepository;
+    public ContactList saveContacts(final NewContactList newContactList, final String accountName) {
+        final Account account = accountRepository.findByName(accountName);
+        final List<Contact> contactList = new ArrayList<>();
+        final ContactList contacts = ContactList.builder().account(account).name(newContactList.getName()).contacts(contactList).build();
+        newContactList.getNumbers().forEach(number -> contactList.add(Contact.builder().mobileNumber(number).contactList(contacts).build()));
+        return contactListRepository.save(contacts);
     }
 
-    public List<Contact> getAllClients() {
-        return contactRepository.findAll();
+    public ContactList getList(final String accountName, final int id) {
+        final Account account = accountRepository.findByName(accountName);
+        return contactListRepository.findByAccountAndId(account, id);
     }
-
-    public Contact findOne(final long id) {
-        return contactRepository.findOne(id);
-    }
-
-    public Contact save(final Contact contact) {
-        return contactRepository.save(contact);
-    }
-
-    public void createContacts(MultipartFile file, final long campaignId) {
-        File convFile = null;
-        try {
-            convFile = File.createTempFile("phone", ".csv");
-        } catch (IOException e) {
-        }
-
-        try (final FileOutputStream fos = new FileOutputStream(convFile)) {
-            fos.write(file.getBytes());
-        } catch (IOException e) {
-        }
-
-        try {
-            final List<Contact> contacts = CSVUtils.parsePhoneNumbers(convFile);
-            final Campaign campaign = campaignService.findOne(campaignId);
-            contacts.forEach(c -> {
-                c.setCampaign(campaign);
-                c.setContactType(ContactType.PRIMARY);
-                save(c);
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }

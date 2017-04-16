@@ -1,11 +1,11 @@
 package com.codebeast.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,19 +15,22 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Contact {
+public class ContactList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private ContactType contactType;
+    private String name;
 
-    private String mobileNumber;
+    @Transient
+    private int count;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonBackReference
-    private ContactList contactList;
+    private Account account;
 
+    @OneToMany(mappedBy = "contactList", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Contact> contacts;
 
 }
